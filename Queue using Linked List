@@ -1,0 +1,75 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+/*
+ * 
+ */
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *front=NULL;
+struct node *rear=NULL;
+void insert(int data)
+{
+    struct node *link=(struct node*)malloc(sizeof(struct node));
+    link->data=data;
+    link->next=NULL;
+    if(front==NULL && rear==NULL)
+    {
+       front=rear=link;
+    }
+    else
+    {
+        rear->next=link;
+        rear=link;
+    }
+}
+void pop(int data)
+{
+    struct node *temp;
+    if(front==NULL)
+    {
+        printf("Queue Empty \n");
+    }
+    else
+    {
+        temp=front;
+        front=front->next;
+        if(front==NULL)
+        {
+            rear=NULL;
+        }
+        free(temp);
+    }
+}
+void display()
+{
+    struct node *ptr=front;
+    while(ptr)
+    {
+        printf("%d",ptr->data);
+        ptr=ptr->next;
+    }
+    printf("\n");
+}
+int main()
+{
+    insert(10);
+    insert(2);
+    insert(30);
+    printf("Queue :");
+    display();
+    pop(10);
+    printf("After dequeue the new Queue :");
+    display();
+    pop(30);
+    printf("After dequeue the new Queue :");
+    display();
+
+
+	return 0;
+}
+
