@@ -1,0 +1,100 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/* 
+ * File:   main.c
+ * Author: sejal
+ *
+ * Created on 25 November, 2018, 12:47 PM
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+/*
+ * 
+ */
+typedef struct node
+{
+    int data;
+    struct node*next;
+};
+struct node *head = NULL;
+struct node *curr = NULL;
+struct node *prev = NULL;
+void display()
+{
+    struct node *ptr=head;
+    while(ptr!=NULL)
+    {
+        printf("%d\n",ptr->data);
+        ptr=ptr->next;
+        
+    }
+}
+void insert (int data)
+{
+    struct node*link=(struct node*)malloc(sizeof(struct node));
+    link->data=data;
+    link->next=head;
+    head=link;
+}
+void delete(int data)
+{
+    int pos =0;
+    if(head==NULL)
+    {
+        printf("\n Linked list not made");
+    }
+    if(head->data==data)
+    {
+        if(head->next!=NULL)
+        {
+            head=head->next;
+            return;
+        }
+        else
+        {
+            head=NULL;
+            printf("\n Empty");
+        }
+    }
+    else if (head->data!=data&&head->next==NULL)
+    {
+        printf("%d Not found",data);
+        return;
+    }
+    curr=head;
+    while(curr->data!=data&&curr->next!=NULL)
+    {
+        prev=curr;
+        curr=curr->next;
+    }
+    if(curr->data==data)
+    {
+        prev->next=prev->next->next;
+        free(curr);
+    }
+    else
+    {
+        printf("%d\n Not found",data );
+    }
+    }
+void main()
+{
+    insert(20);
+    insert(30);
+    insert(100);
+    insert(200);
+    insert(65);
+    insert(80);
+    printf("Before removal \n");
+    display();
+    delete(200);
+    printf("After removal \n");
+    display();
+    return 0;
+}
