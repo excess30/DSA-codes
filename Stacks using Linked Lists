@@ -1,0 +1,75 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+/*
+ * 
+ */
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *head;
+int empty()
+{
+    if(head==NULL)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+void insert(int data)
+{
+     struct node *link;
+    if(empty())
+    {
+    link=(struct node*)malloc(sizeof(struct node));
+    link->data=data;
+    link->next=NULL;
+    head=link;
+}
+    else
+    {
+        struct node *y=head;
+        link=(struct node*)malloc(sizeof(struct node));
+        link->data=data;
+        link->next=y;
+        head=link;
+    }
+     printf("Inserted \n");
+}
+void pop(int data)
+{
+    struct node *j;
+    j=head;
+    head=head->next;
+    j->next=NULL;
+    printf("Deleted \n");
+}
+void display()
+{
+    struct node *ptr;
+    ptr=head;
+    while(ptr!=NULL)
+    {
+        printf("%d",ptr->data);
+        ptr=ptr->next;
+    }
+    printf("\n");
+}
+int main()
+{
+	insert(20);
+	insert(30);
+	insert(10);
+	pop(10);
+	printf("Stack Content: \n");
+	display();
+
+	return 0;
+}
+
