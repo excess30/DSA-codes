@@ -1,0 +1,40 @@
+#include <stdlib.h>
+/*
+ * 
+ */
+int main()
+{
+int i,n,search,low,mid,high,a[100];
+printf("Enter the number of elements \n");
+scanf("%d",&n);
+printf("Enter the elements %d \n");
+for(i=0;i<n;i++)
+    scanf("%d",&a[i]);
+printf("Enter the element to be searched \n");
+scanf("%d",&search);
+low=0;
+high=n-1;
+mid=(low+high)/2;
+while(low<high)
+{
+    if(a[mid]<search)
+    {
+        low=mid+1;
+    }
+    else if (a[mid]==search)
+    {
+        printf("Element found at position %d \n",search,mid+1);
+        break;
+    }
+    else
+    {
+        high=mid-1;
+    }
+    mid=(low+high)/2;
+}
+if(low>high)
+{
+    printf("Not found \n %d",search);
+    return 0;
+}
+}
